@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Portfolio</title>
+  <link rel="stylesheet" href="/style.css">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+</head>
+<body>
+  <header>
+    <h1>Your Portfolio</h1>
+  </header>
+
+  <main class="container">
+    <!-- Карусель с фиксированными изображениями -->
+    <h2>Your Portfolio Item</h2>
+    <div id="staticCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 400px; margin: auto;">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/images/ex1.jpg" class="d-block w-100" alt="Image 1">
+          </div>
+          <div class="carousel-item">
+            <img src="/images/ex2.jpg" class="d-block w-100" alt="Image 2">
+          </div>
+          <div class="carousel-item">
+            <img src="/images/ex3.jpg" class="d-block w-100" alt="Image 3">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#staticCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#staticCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      
+
+    <ul>
+        <% portfolioItems.forEach(item => { %>
+          <li>
+            <h3><%= item.title %></h3>
+            <p><%= item.description %></p>
+      
+            <!-- Форма обновления -->
+            <form action="/portfolio/update/<%= item._id %>" method="POST">
+              <input type="text" name="title" value="<%= item.title %>" required>
+              <input type="text" name="description" value="<%= item.description %>" required>
+              <button type="submit">Update</button>
+            </form>
+      
+            <!-- Форма удаления -->
+            <form action="/portfolio/delete/<%= item._id %>" method="POST">
+              <button type="submit">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+      
+
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required></textarea><br>
+
+      <button type="submit">Add Item</button>
+    </form>
+  </main>
+
+  <footer class="text-center mt-4">
+    <p>Zhansaya BDA-2304</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
